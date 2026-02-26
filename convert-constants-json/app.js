@@ -1,4 +1,5 @@
 const { PHILOSOPHERS_DATA } = require("../common/constants/constants");
+const oldResults = require("../common/constants/philosophers-data");
 const { writeToFile } = require("../common/utils/utils");
 const { findOutPhilosopherName, hitTranslationAPI } = require("./utils/utils");
 
@@ -32,9 +33,11 @@ async function convert() {
 
 module.exports.start = async function () {
   let result = await convert();
-
+  let newResults = [...oldResults, ...result]
+  console.log("\nCombined Philosophers Data");
+ 
   writeToFile(
-    result,
+    newResults,
     { varName: "CONVERTED_CONSTANTS" },
     "convert-constants-json"
   );
