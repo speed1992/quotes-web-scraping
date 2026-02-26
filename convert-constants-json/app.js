@@ -1,5 +1,4 @@
 const { PHILOSOPHERS_DATA } = require("../common/constants/constants");
-const oldResults = require("../common/constants/philosophers-data");
 const { writeToFile } = require("../common/utils/utils");
 const { findOutPhilosopherName, hitTranslationAPI } = require("./utils/utils");
 
@@ -10,6 +9,8 @@ let obj = {
     hi: "",
   },
 };
+
+const url = "https://cdn.jsdelivr.net/gh/speed1992/quotes/src/common/static/philosophers-data.json";
 
 async function getConvertedObject(philosopherInfo) {
   let newObj = { ...obj };
@@ -31,8 +32,25 @@ async function convert() {
   return result;
 }
 
+async function fetchOldResults() {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const oldResults = await response.json(); // JSON data stored
+    console.log("\nFetched old philosophers data successfully");
+    return oldResults;
+  } catch (err) {
+    console.error("Error fetching data:", err);
+  }
+}
+
 module.exports.start = async function () {
   let result = await convert();
+  let oldResults = await fetchOldResults();
   let newResults = [...oldResults, ...result]
   console.log("\nCombined Philosophers Data");
  
