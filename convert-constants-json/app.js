@@ -56,7 +56,7 @@ module.exports.start = async function () {
  
   writeToFile(
     newResults,
-    { varName: "CONVERTED_CONSTANTS" },
+    { varName: "PHILOSOPHERS-DATA" },
     "convert-constants-json"
   );
 };
