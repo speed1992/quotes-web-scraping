@@ -34,7 +34,7 @@ const { start: filterSanitizeQuotations } = require("./filter-quotes/app");
   }, 2000);
 
   console.log(`Two outputs generated:
-    1. convert-constants-json/output/converted_constants.json
+    1. convert-constants-json/output/
     2. filter-quotes/output`);
 })();
 
